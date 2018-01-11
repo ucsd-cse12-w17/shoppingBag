@@ -44,13 +44,6 @@ public class ShoppingBagTest {
 		return null;
 	}
 	
-
-	@Test
-	public void testEmptyHasCount0() {	
-		ShoppingBag bagToTest = makeBag();
-		assertEquals(bagToTest.totalCount(), 0);
-	}
-
 	@Test
 	public void addedHasCount1() {
 		ShoppingBag bagToTest = makeBag();
@@ -58,36 +51,6 @@ public class ShoppingBagTest {
 		Item i = new Item("Shampoo", 5);
 		bagToTest.add(i);
 		assertEquals(bagToTest.totalCount(), 1);
-	}
-
-	@Test
-	public void addDuplicateCount() {
-		ShoppingBag bagToTest = makeBag();
-
-		Item i = new Item("Shampoo", 5);
-		bagToTest.add(i);
-		bagToTest.add(i);
-		assertEquals(bagToTest.totalCount(), 2);
-		assertEquals(bagToTest.itemCount(i), 2);
-	}
-
-	@Test
-	public void addEqualCount() {
-		ShoppingBag bagToTest = makeBag();
-
-		Item i = new Item("Shampoo", 5);
-		Item i2 = new Item("Shampoo", 5);
-		bagToTest.add(i);
-		bagToTest.add(i2);
-		assertEquals(bagToTest.totalCount(), 2);
-		assertEquals(bagToTest.itemCount(i), 2);
-	}
-	
-	@Test
-	public void addNullCount() {
-		ShoppingBag bagToTest = makeBag();
-		bagToTest.add(null);
-		assertEquals(bagToTest.totalCount(), 0);
 	}
 	
 	
