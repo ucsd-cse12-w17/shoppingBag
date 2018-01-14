@@ -53,6 +53,81 @@ public class ShoppingBagTest {
 		assertEquals(bagToTest.totalCount(), 1);
 	}
 	
+	@Test
+	public void addDuplicate() {
+		ShoppingBag bagToTest = makeBag();
+		
+		Item i = new Item("Shampoo", 5);
+		bagToTest.add(i);
+		bagToTest.add(i);
+		assertEquals(bagToTest.itemCount(i), 2);
+	}
 	
-
+	@Test
+	public void addALot() {
+		ShoppingBag bagToTest = makeBag();
+		
+		Item[] itemList = {new Item("Shampoo", 5), 
+				new Item("Lotion", 10), new Item("Cream", 20),
+				new Item("Conditioner", 15), new Item("Toothpaste", 3)};
+		for (int i = 0; i < itemList.length; i++){
+			for (int j = 0; j < 10000; j++){
+				bagToTest.add(itemList[i]);
+			}
+		}
+		assertEquals(bagToTest.totalCount(), 50000);
+	}
+	
+	@Test
+	public void singleRemoval() {
+		ShoppingBag bagToTest = makeBag();
+		
+		Item i = new Item("Shampoo", 5);
+		bagToTest.add(i);
+		bagToTest.add(i);
+		boolean test = bagToTest.removeOne(i);
+		assertEquals(bagToTest.itemCount(i), 1);
+		assertEquals(test, true);
+		assertEquals(bagToTest.totalCount(), 1);
+	}
+	
+	@Test
+	public void removeNonExist() {
+		ShoppingBag bagToTest = makeBag();
+		
+		Item i = new Item("Shampoo", 5);
+		assertEquals(bagToTest.removeOne(i), false);
+		assertEquals(bagToTest.removeAll(i), false);
+	}
+	
+	@Test
+	public void removeAll() {
+		ShoppingBag bagToTest = makeBag();
+		
+		Item i = new Item("Shampoo", 5);
+		bagToTest.add(i);
+		bagToTest.add(i);
+		boolean test = bagToTest.removeAll(i);
+		assertEquals(bagToTest.itemCount(i), 0);
+		assertEquals(test, true);
+		assertEquals(bagToTest.totalCount(), 0);
+	}
+	
+	@Test
+	public void empty() {
+		ShoppingBag bagToTest = makeBag();
+		
+		Item[] itemList = {new Item("Shampoo", 5), 
+				new Item("Lotion", 10), new Item("Cream", 20),
+				new Item("Conditioner", 15), new Item("Toothpaste", 3)};
+		for (int i = 0; i < itemList.length; i++){
+			for (int j = 0; j < 5; j++){
+				bagToTest.add(itemList[i]);
+			}
+		}
+		bagToTest.empty();
+		assertEquals(bagToTest.totalCount(), 0);
+	}
+	
+	
 }
