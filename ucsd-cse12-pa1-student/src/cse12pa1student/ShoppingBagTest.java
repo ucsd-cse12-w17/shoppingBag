@@ -73,7 +73,10 @@ public class ShoppingBagTest {
 		Item j = new Item("Shampoo", 5);
 		bagToTest.add(i);
 		bagToTest.add(j);
+		bagToTest.add(new Item("Lotion", 10));
+		bagToTest.add(new Item("Lotion", 10));
 		assertEquals(bagToTest.itemCount(i), 2);
+		assertEquals(bagToTest.totalCount(), 4);
 	}
 
 	@Test
@@ -87,6 +90,7 @@ public class ShoppingBagTest {
 				bagToTest.add(itemList[i]);
 			}
 		}
+		assertEquals(bagToTest.itemCount(new Item("Shampoo", 5)), 10000);
 		assertEquals(bagToTest.totalCount(), 50000);
 	}
 
@@ -97,10 +101,11 @@ public class ShoppingBagTest {
 		Item i = new Item("Shampoo", 5);
 		bagToTest.add(i);
 		bagToTest.add(i);
-		boolean test = bagToTest.removeOne(i);
+		assertEquals(bagToTest.removeOne(new Item("Lotion", 10)), false);
+		assertEquals(bagToTest.removeOne(i), true);
 		assertEquals(bagToTest.itemCount(i), 1);
-		assertEquals(test, true);
-		assertEquals(bagToTest.totalCount(), 1);
+		assertEquals(bagToTest.removeOne(i), true);
+		assertEquals(bagToTest.totalCount(), 0);
 	}
 
 	@Test
@@ -120,6 +125,7 @@ public class ShoppingBagTest {
 		bagToTest.add(i);
 		bagToTest.add(i);
 		boolean test = bagToTest.removeAll(i);
+		assertEquals(bagToTest.removeAll(new Item("Lotion", 10)), false);
 		assertEquals(bagToTest.itemCount(i), 0);
 		assertEquals(test, true);
 		assertEquals(bagToTest.totalCount(), 0);
@@ -143,10 +149,19 @@ public class ShoppingBagTest {
 	@Test
 	public void totalPrice() {
 		ShoppingBag bagToTest = makeBag();
+		ShoppingBag emptyBag = makeBag();
 		
 		bagToTest.add(new Item("Shampoo", 5));
 		bagToTest.add(new Item("Shampoo", 5));
 		bagToTest.add(new Item("Lotion", 10));
 		assertEquals(bagToTest.totalPrice(), 20);
+		assertEquals(emptyBag.totalPrice(), 0);
 	}
+	
+	public void emptyBag() {
+		ShoppingBag emptyBag = makeBag();
+		
+		assertEquals(emptyBag.totalCount(), 0);
+	}
+
 }
