@@ -158,10 +158,22 @@ public class ShoppingBagTest {
 		assertEquals(emptyBag.totalPrice(), 0);
 	}
 	
+	@Test
 	public void emptyBag() {
 		ShoppingBag emptyBag = makeBag();
 		
 		assertEquals(emptyBag.totalCount(), 0);
+		assertEquals(emptyBag.totalPrice(), 0);
+		assertEquals(emptyBag.itemCount(new Item("Shampoo", 5)), 0);
 	}
+	
+	@Test
+	public void extortionatePrice() {
+		ShoppingBag bagToTest = makeBag();
+		
+		bagToTest.add(new Item("estate", 1000000));
+		assertEquals(bagToTest.totalPrice(), 1000000);
+	}
+	
 
 }
