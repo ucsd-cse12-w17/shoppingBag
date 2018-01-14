@@ -175,5 +175,26 @@ public class ShoppingBagTest {
 		assertEquals(bagToTest.totalPrice(), 1000000);
 	}
 	
+	@Test
+	public void removeNull() {
+		ShoppingBag bagToTest = makeBag();
+		
+		Item i = null;
+		bagToTest.add(i);
+		assertEquals(bagToTest.totalCount(), 0);
+	}
+	
+	@Test
+	public void addAndRemove(){
+		ShoppingBag bagToTest = makeBag();
+		
+		Item i = new Item("Shampoo", 5);
+		bagToTest.add(i);
+		bagToTest.removeOne(i);
+		bagToTest.add(i);
+		bagToTest.removeOne(i);
+		bagToTest.add(i);
+		assertEquals(bagToTest.itemCount(i), 1);
+	}
 
 }
