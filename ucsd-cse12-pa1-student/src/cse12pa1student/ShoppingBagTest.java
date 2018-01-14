@@ -12,8 +12,8 @@ import org.junit.runners.Parameterized;
 @RunWith(Parameterized.class)
 public class ShoppingBagTest {
 
-	public static Collection<Object[]> BAGNUMS =
-			Arrays.asList(new Object[][] { {0}, {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11} });
+	public static Collection<Object[]> BAGNUMS = Arrays.asList(
+			new Object[][] { { 0 }, { 1 }, { 2 }, { 3 }, { 4 }, { 5 }, { 6 }, { 7 }, { 8 }, { 9 }, { 10 }, { 11 } });
 	private int bagType;
 
 	public ShoppingBagTest(int bagType) {
@@ -25,25 +25,37 @@ public class ShoppingBagTest {
 	public static Collection<Object[]> bags() {
 		return BAGNUMS;
 	}
-	
+
 	private ShoppingBag makeBag() {
-		switch(this.bagType) {
-			case 0: return new Bag0();
-			case 1: return new Bag1();
-			case 2: return new Bag2();
-			case 3: return new Bag3();
-			case 4: return new Bag4();
-			case 5: return new Bag5();
-			case 6: return new Bag6();
-			case 7: return new Bag7();
-			case 8: return new Bag8();
-			case 9: return new Bag9();
-			case 10: return new Bag10();
-			case 11: return new Bag11();
+		switch (this.bagType) {
+		case 0:
+			return new Bag0();
+		case 1:
+			return new Bag1();
+		case 2:
+			return new Bag2();
+		case 3:
+			return new Bag3();
+		case 4:
+			return new Bag4();
+		case 5:
+			return new Bag5();
+		case 6:
+			return new Bag6();
+		case 7:
+			return new Bag7();
+		case 8:
+			return new Bag8();
+		case 9:
+			return new Bag9();
+		case 10:
+			return new Bag10();
+		case 11:
+			return new Bag11();
 		}
 		return null;
 	}
-	
+
 	@Test
 	public void addedHasCount1() {
 		ShoppingBag bagToTest = makeBag();
@@ -52,36 +64,36 @@ public class ShoppingBagTest {
 		bagToTest.add(i);
 		assertEquals(bagToTest.totalCount(), 1);
 	}
-	
+
 	@Test
 	public void addDuplicate() {
 		ShoppingBag bagToTest = makeBag();
-		
+
 		Item i = new Item("Shampoo", 5);
+		Item j = new Item("Shampoo", 5);
 		bagToTest.add(i);
-		bagToTest.add(i);
+		bagToTest.add(j);
 		assertEquals(bagToTest.itemCount(i), 2);
 	}
-	
+
 	@Test
 	public void addALot() {
 		ShoppingBag bagToTest = makeBag();
-		
-		Item[] itemList = {new Item("Shampoo", 5), 
-				new Item("Lotion", 10), new Item("Cream", 20),
-				new Item("Conditioner", 15), new Item("Toothpaste", 3)};
-		for (int i = 0; i < itemList.length; i++){
-			for (int j = 0; j < 10000; j++){
+
+		Item[] itemList = { new Item("Shampoo", 5), new Item("Lotion", 10), new Item("Cream", 20),
+				new Item("Conditioner", 15), new Item("Toothpaste", 3) };
+		for (int i = 0; i < itemList.length; i++) {
+			for (int j = 0; j < 10000; j++) {
 				bagToTest.add(itemList[i]);
 			}
 		}
 		assertEquals(bagToTest.totalCount(), 50000);
 	}
-	
+
 	@Test
 	public void singleRemoval() {
 		ShoppingBag bagToTest = makeBag();
-		
+
 		Item i = new Item("Shampoo", 5);
 		bagToTest.add(i);
 		bagToTest.add(i);
@@ -90,20 +102,20 @@ public class ShoppingBagTest {
 		assertEquals(test, true);
 		assertEquals(bagToTest.totalCount(), 1);
 	}
-	
+
 	@Test
 	public void removeNonExist() {
 		ShoppingBag bagToTest = makeBag();
-		
+
 		Item i = new Item("Shampoo", 5);
 		assertEquals(bagToTest.removeOne(i), false);
 		assertEquals(bagToTest.removeAll(i), false);
 	}
-	
+
 	@Test
 	public void removeAll() {
 		ShoppingBag bagToTest = makeBag();
-		
+
 		Item i = new Item("Shampoo", 5);
 		bagToTest.add(i);
 		bagToTest.add(i);
@@ -112,22 +124,29 @@ public class ShoppingBagTest {
 		assertEquals(test, true);
 		assertEquals(bagToTest.totalCount(), 0);
 	}
-	
+
 	@Test
 	public void empty() {
 		ShoppingBag bagToTest = makeBag();
-		
-		Item[] itemList = {new Item("Shampoo", 5), 
-				new Item("Lotion", 10), new Item("Cream", 20),
-				new Item("Conditioner", 15), new Item("Toothpaste", 3)};
-		for (int i = 0; i < itemList.length; i++){
-			for (int j = 0; j < 5; j++){
+
+		Item[] itemList = { new Item("Shampoo", 5), new Item("Lotion", 10), new Item("Cream", 20),
+				new Item("Conditioner", 15), new Item("Toothpaste", 3) };
+		for (int i = 0; i < itemList.length; i++) {
+			for (int j = 0; j < 5; j++) {
 				bagToTest.add(itemList[i]);
 			}
 		}
 		bagToTest.empty();
 		assertEquals(bagToTest.totalCount(), 0);
 	}
-	
-	
+
+	@Test
+	public void totalPrice() {
+		ShoppingBag bagToTest = makeBag();
+		
+		bagToTest.add(new Item("Shampoo", 5));
+		bagToTest.add(new Item("Shampoo", 5));
+		bagToTest.add(new Item("Lotion", 10));
+		assertEquals(bagToTest.totalPrice(), 20);
+	}
 }
