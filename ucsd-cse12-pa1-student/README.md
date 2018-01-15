@@ -42,4 +42,4 @@ Bag10: Bag10 is buggy because its removeAll method will remove all the items
 in the cart.
 Bag11: Bag11 is buggy with its itemCount method. When counting a item that is
 not in the cart while there's other item in the cart, the method fails to give
-the result of zero.
+the result of zero. 
