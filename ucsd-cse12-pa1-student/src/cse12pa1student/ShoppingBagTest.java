@@ -149,43 +149,45 @@ public class ShoppingBagTest {
 	@Test
 	public void totalPrice() {
 		ShoppingBag bagToTest = makeBag();
-		
+
 		bagToTest.add(new Item("Shampoo", 5));
 		bagToTest.add(new Item("Shampoo", 5));
 		bagToTest.add(new Item("Lotion", 10));
 		assertEquals(bagToTest.totalPrice(), 20);
 	}
-	
+
 	@Test
 	public void emptyBag() {
 		ShoppingBag emptyBag = makeBag();
-		
+
 		assertEquals(emptyBag.totalCount(), 0);
-		/*assertEquals(emptyBag.totalPrice(), 0);
-		assertEquals(emptyBag.itemCount(new Item("Shampoo", 5)), 0);*/
+		/*
+		 * assertEquals(emptyBag.totalPrice(), 0);
+		 * assertEquals(emptyBag.itemCount(new Item("Shampoo", 5)), 0);
+		 */
 	}
-	
+
 	@Test
 	public void extortionatePrice() {
 		ShoppingBag bagToTest = makeBag();
-		
+
 		bagToTest.add(new Item("estate", 1000000));
 		assertEquals(bagToTest.totalPrice(), 1000000);
 	}
-	
+
 	@Test
 	public void removeNull() {
 		ShoppingBag bagToTest = makeBag();
-		
+
 		Item i = null;
 		bagToTest.add(i);
 		assertEquals(bagToTest.totalCount(), 0);
 	}
-	
+
 	@Test
-	public void addAndRemove(){
+	public void addAndRemove() {
 		ShoppingBag bagToTest = makeBag();
-		
+
 		Item i = new Item("Shampoo", 5);
 		bagToTest.add(i);
 		bagToTest.removeOne(i);
@@ -194,11 +196,11 @@ public class ShoppingBagTest {
 		bagToTest.add(i);
 		assertEquals(bagToTest.itemCount(i), 1);
 	}
-	
+
 	@Test
 	public void removeAll2() {
 		ShoppingBag bagToTest = makeBag();
-		
+
 		Item i = new Item("Shampoo", 5);
 		Item j = new Item("Lotion", 10);
 		bagToTest.add(i);
@@ -207,11 +209,11 @@ public class ShoppingBagTest {
 		bagToTest.removeAll(i);
 		assertEquals(bagToTest.itemCount(j), 1);
 	}
-	
+
 	@Test
 	public void itemCount() {
 		ShoppingBag bagToTest = makeBag();
-		
+
 		Item i = new Item("Shampoo", 5);
 		Item j = new Item("Lotion", 10);
 		Item k = new Item("Cream", 20);
