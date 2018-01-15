@@ -223,6 +223,5 @@ public class ShoppingBagTest {
 		bagToTest.add(j);
 		assertEquals(bagToTest.itemCount(k), 0);
 	}
-
 	
 }
