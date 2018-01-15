@@ -205,9 +205,21 @@ public class ShoppingBagTest {
 		bagToTest.add(i);
 		bagToTest.add(j);
 		bagToTest.removeAll(i);
-		//assertEquals(bagToTest.itemCount(new Item("Shampoo", 5)), 0);
 		assertEquals(bagToTest.itemCount(j), 1);
-		//assertEquals(bagToTest.totalCount(), 2);
+	}
+	
+	@Test
+	public void itemCount() {
+		ShoppingBag bagToTest = makeBag();
+		
+		Item i = new Item("Shampoo", 5);
+		Item j = new Item("Lotion", 10);
+		Item k = new Item("Cream", 20);
+		bagToTest.add(i);
+		bagToTest.add(i);
+		bagToTest.add(j);
+		bagToTest.add(j);
+		assertEquals(bagToTest.itemCount(k), 0);
 	}
 
 }
